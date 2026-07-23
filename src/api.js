@@ -1,4 +1,7 @@
-const API_BASE = (import.meta.env.VITE_API_BASE || '/api').replace(/\/$/, '')
+const DEFAULT_API_BASE = import.meta.env.PROD
+  ? 'https://test.connecto-me.com/ai-gateway'
+  : '/api'
+const API_BASE = (import.meta.env.VITE_API_BASE || DEFAULT_API_BASE).replace(/\/$/, '')
 const TOKEN_STORAGE_KEY = 'connecto.gateway.access-token.v1'
 const pendingReads = new Map()
 let cachedToken
