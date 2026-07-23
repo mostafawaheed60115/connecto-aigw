@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { AlertCircle, Check, LogOut, RefreshCw, Server, X } from 'lucide-react'
-import { api, endpoint, getAccessToken, getApiBase, setAccessToken } from './api'
+import { api, endpoint, getAccessPassword, getApiBase, setAccessPassword } from './api'
 import Login from './Login'
 import { ConfirmModal, ResourceModal } from './modals'
 import { Dashboard, HealthPage, Playground, ResourcePage, RoutesPage } from './pages'
@@ -235,10 +235,10 @@ function GatewayApp({ onLogout }) {
 }
 
 export default function App() {
-  const [authenticated, setAuthenticated] = useState(() => Boolean(getAccessToken()))
+  const [authenticated, setAuthenticated] = useState(() => Boolean(getAccessPassword()))
 
   const logout = useCallback(() => {
-    setAccessToken('')
+    setAccessPassword('')
     setAuthenticated(false)
   }, [])
 

@@ -20,5 +20,5 @@ npm run build
 ```
 
 The Playwright suite covers authenticated loading, desktop/mobile rendering, and
-resource search. Gateway credentials are entered at runtime and stored only for
+resource search. The gateway password is entered at runtime and stored only for
 the current browser session.

@@ -10,7 +10,7 @@ async function mockGateway(page) {
     const request = route.request()
     const path = new URL(request.url()).pathname.replace(/^\/api/, '')
     if (path.startsWith('/admin') || path === '/v1/inference') {
-      expect(request.headers().authorization).toBe('Bearer test-token')
+      expect(request.headers()['x-gateway-password']).toBe('test-password')
     }
 
     const responses = {
@@ -35,7 +35,7 @@ test('authenticates and manages searchable gateway data', async ({ page }) => {
   await page.goto('/')
 
   await expect(page.getByRole('heading', { name: 'Secure operations console' })).toBeVisible()
-  await page.getByLabel('Gateway access token').fill('test-token')
+  await page.getByLabel('Password').fill('test-password')
   await page.getByRole('button', { name: 'Open console' }).click()
 
   await expect(page.getByRole('heading', { name: 'Gateway operations' })).toBeVisible()

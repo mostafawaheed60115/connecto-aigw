@@ -2,29 +2,29 @@ const DEFAULT_API_BASE = import.meta.env.PROD
   ? 'https://test.connecto-me.com/ai-gateway'
   : '/api'
 const API_BASE = (import.meta.env.VITE_API_BASE || DEFAULT_API_BASE).replace(/\/$/, '')
-const TOKEN_STORAGE_KEY = 'connecto.gateway.access-token.v1'
+const PASSWORD_STORAGE_KEY = 'connecto.gateway.password.v1'
 const pendingReads = new Map()
-let cachedToken
+let cachedPassword
 
 export function getApiBase() {
   return API_BASE
 }
 
-export function getAccessToken() {
-  if (cachedToken !== undefined) return cachedToken
+export function getAccessPassword() {
+  if (cachedPassword !== undefined) return cachedPassword
   try {
-    cachedToken = sessionStorage.getItem(TOKEN_STORAGE_KEY) || ''
+    cachedPassword = sessionStorage.getItem(PASSWORD_STORAGE_KEY) || ''
   } catch {
-    cachedToken = ''
+    cachedPassword = ''
   }
-  return cachedToken
+  return cachedPassword
 }
 
-export function setAccessToken(token) {
-  cachedToken = token.trim()
+export function setAccessPassword(password) {
+  cachedPassword = password
   try {
-    if (cachedToken) sessionStorage.setItem(TOKEN_STORAGE_KEY, cachedToken)
-    else sessionStorage.removeItem(TOKEN_STORAGE_KEY)
+    if (cachedPassword) sessionStorage.setItem(PASSWORD_STORAGE_KEY, cachedPassword)
+    else sessionStorage.removeItem(PASSWORD_STORAGE_KEY)
   } catch {
     // In-memory authentication still works when storage is unavailable.
   }
@@ -32,9 +32,9 @@ export function setAccessToken(token) {
 
 export async function api(path, options = {}) {
   const { headers, timeout = 30_000, ...requestOptions } = options
-  const token = getAccessToken()
+  const password = getAccessPassword()
   const method = (requestOptions.method || 'GET').toUpperCase()
-  const requestKey = method === 'GET' ? `${token}:${path}` : ''
+  const requestKey = method === 'GET' ? `${password}:${path}` : ''
   if (requestKey && pendingReads.has(requestKey)) {
     return pendingReads.get(requestKey)
   }
@@ -50,7 +50,7 @@ export async function api(path, options = {}) {
         headers: {
           Accept: 'application/json',
           'Content-Type': 'application/json',
-          ...(token ? { Authorization: `Bearer ${token}` } : {}),
+          ...(password ? { 'X-Gateway-Password': password } : {}),
           ...headers,
         },
       })

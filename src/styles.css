@@ -48,9 +48,9 @@ main { min-width: 0; }.topbar { min-height: 82px; background: white; border-bott
 .login-card h1 { margin: 0; font-size: 25px; letter-spacing: -.7px; }
 .login-card > p { color: #66758a; line-height: 1.6; font-size: 14px; margin: 10px 0 24px; }
 .login-card form > label { display: block; color: #39485b; font-size: 12px; font-weight: 700; margin-bottom: 7px; }
-.token-input { display: flex; align-items: center; gap: 9px; border: 1px solid #d8e0e9; border-radius: 8px; padding: 0 11px; color: #758195; }
-.token-input:focus-within { border-color: #3980ed; box-shadow: 0 0 0 3px #e8f1ff; }
-.token-input input { width: 100%; border: 0; outline: 0; padding: 11px 0; color: #1f3046; background: transparent; }
+.password-input { display: flex; align-items: center; gap: 9px; border: 1px solid #d8e0e9; border-radius: 8px; padding: 0 11px; color: #758195; }
+.password-input:focus-within { border-color: #3980ed; box-shadow: 0 0 0 3px #e8f1ff; }
+.password-input input { width: 100%; border: 0; outline: 0; padding: 11px 0; color: #1f3046; background: transparent; }
 .login-submit { width: 100%; justify-content: center; margin-top: 14px; min-height: 42px; }
 .login-error { color: #b42f35; background: #fff0f0; border: 1px solid #f0c7ca; border-radius: 7px; padding: 9px 10px; margin-top: 10px; font-size: 12px; }
 .login-card > small { display: block; color: #8490a1; margin-top: 22px; overflow-wrap: anywhere; }
